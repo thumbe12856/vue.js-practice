@@ -18,3 +18,7 @@ Route::get('/', function () {
 Route::get('example', function () {
     return view('example');
 });
+
+Route::get('todo', function () {
+    return view('todo');
+});

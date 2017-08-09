@@ -15,3 +15,10 @@ const router = new VueRouter({
 });
 
 new Vue(Vue.util.extend({ router }, App)).$mount('#app');
+
+new Vue({
+    el: '#app',
+    data: {
+        msg: 'Test'
+    }
+});
