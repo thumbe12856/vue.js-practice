@@ -9,7 +9,7 @@
         <title>Todo List</title>
     </head>
     <body>
-        <div id="todoList">
+        <div id="test">
             <h1>@{{ msg }}</h1>
             <li v-for="item in items">
                 @{{ item.id }}
@@ -18,26 +18,20 @@
             <a v-bind:href="url">@{{ url }}</a>
         </div>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.js"></script>
-        <!--<script src="{{ asset('js/todo.js') }}"></script>-->
-        <script>
-            Vue.component('my-component', {
-                template: '<h1>A custom component!</h1>'
-            });
+        <br/><br/><br/>
+        <div id="todoList">
+            <label for="todoListData">Todo List</label>
+            <input id="todoListData" type="text" v-on:keyup.enter="addList(nowTodoThing)" v-model="nowTodoThing"/>
+            <div id="list">
+                <li v-for="(todo, index) in todoThings">
+                    <span v-show="!(editSwitch[index])">@{{ todo }}</span>
+                    <button v-show="!(editSwitch[index])" v-on:click="showEditList(index, todo)">Edit</button>
+                    <input v-show="editSwitch[index]" v-model="editTodoThing"  v-on:keyup.enter="editList(index, editTodoThing)"/>
+                    <button v-show="editSwitch[index]" v-on:click="editList(index, editTodoThing)">Save</button>                    <button v-on:click="removeList(index)">Delete</button>
+                </li>
+            </div>
+        </div>
 
-            new Vue({
-                el: '#todoList',
-                data: {
-                    msg: 'Test 123',
-                    url: 'https://google.com',
-                    items: [
-                        {id: 1},
-                        {id: 2},
-                        {id: 3}
-                    ]
-
-                }
-            });
-        </script>
+        <script src="{{ asset('js/todo.js') }}"></script>
     </body>
 </html>
