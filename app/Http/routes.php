@@ -22,3 +22,7 @@ Route::get('example', function () {
 Route::get('todo', function () {
     return view('todo');
 });
+
+Route::get('test', function () {
+    return view('test');
+});
