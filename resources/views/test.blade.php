@@ -6,7 +6,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Todo List</title>
+        <title>Test</title>
     </head>
     <body>
         <div id="test">
@@ -28,20 +28,34 @@
                 <label for="three">business</label>
                 <component :is="currentView"></component>
             </div>
+
+            <div id="money">
+                <input id="NTD" v-model="NTD"/>
+                <p>@{{ nowDate() }}</p>
+                <p>日幣: @{{japan}}</p>
+            </div>
+
+            <div id="githubRepoDiv">
+                <h1>Thumbe Repositories:</h1>
+                <ul>
+                    <li v-for="repo in githubRepo">@{{ repo }}</li>
+                </ul>
+            </div>
         </div>
 
-        <!--<script src="{{ asset('js/test.js') }}"></script>-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.js"></script>
+        <script src="{{ asset('js/test.js') }}"></script>
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.js"></script>
+        <script src="https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js"></script>
         <script>
             Vue.component('my-component', {
                 template: '<h1>A custom component!</h1>'
             });
 
             var Bike = {
-                template: '<div>腳踏車</div>'
+                template: '<p>腳踏車</p>'
             };
 
-            var vm = new Vue({
+            var myVue = new Vue({
                 el: '#test',
                 data: {
                     msg: 'Test 123',
@@ -51,15 +65,39 @@
                         {id: 2},
                         {id: 3}
                     ],
-                    currentView: Bike
+                    currentView: Bike,
+                    NTD: 0,
+                    githubRepo: []
+                },
+                mounted: function() {
+                    this.fetchRepos();
                 },
                 components: {
-                    fast: {template: '<div>快車</div>'},
-                    bus: {template: '<div>公車</div>'},
-                    business: {template: '<div>商務艙</div>'}
+                    fast: {template: '<h3>快車</h3>'},
+                    bus: {template: '<h2>公車</h2>'},
+                    business: {template: '<h1>商務艙</h1>'}
+                },
+                computed: {
+                    japan: function() {
+                        return this.NTD * 0.2713;
+                    }
+                },
+                methods: {
+                    nowDate: function() {
+                        console.log('When data re-render happen, methods are running.');
+                        return Date.now();
+                    },
+                    fetchRepos: function() {
+                        this.$http.get('https://api.github.com/users/thumbe12856/repos').then((response) => {
+                            response.body.forEach(function (element){
+                                myVue.githubRepo.push(element.full_name);
+                            });
+                        }, (response) => {
+                            console.log('fail', response);
+                        });
+                    }
                 }
-
             });
-        </script>
+        </script>-->
     </body>
 </html>

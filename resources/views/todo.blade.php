@@ -9,15 +9,6 @@
         <title>Todo List</title>
     </head>
     <body>
-        <div id="test">
-            <h1>@{{ msg }}</h1>
-            <li v-for="item in items">
-                @{{ item.id }}
-            </li>
-            <my-component></my-component>
-            <a v-bind:href="url">@{{ url }}</a>
-        </div>
-
         <br/><br/><br/>
         <div id="todoList">
             <label for="todoListData">Todo List</label>

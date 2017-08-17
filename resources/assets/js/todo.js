@@ -11,23 +11,23 @@ var todoList = new Vue({
     },
     methods: {
         addList: function(data) {
-            this.$data.todoThings.push(data);
-            this.$data.editSwitch.push(false);
+            this.todoThings.push(data);
+            this.editSwitch.push(false);
             Vue.set(this.editSwitch, this.latestIndex, false);
         },
         removeList: function(index) {
-            this.$data.todoThings.splice(index, 1);
+            this.todoThings.splice(index, 1);
             Vue.set(this.editSwitch, this.latestIndex, false);
         },
         editList: function(index, data) {
             Vue.set(this.editSwitch, index, false);
-            this.$data.todoThings[index] = data;
+            this.todoThings[index] = data;
         },
         showEditList: function(index, data) {
             Vue.set(this.editSwitch, this.latestIndex, false);
             Vue.set(this.editSwitch, index, true);
             this.latestIndex = index;
-            this.$data.editTodoThing = data;
+            this.editTodoThing = data;
         }
     }
 });

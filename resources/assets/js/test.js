@@ -1,10 +1,16 @@
-import Vue from 'vue/dist/vue.js'
+import VueResource from 'vue-resource/dist/vue-resource'
+import Vue from 'vue'
+Vue.use(require('vue-resource'));
 
 Vue.component('my-component', {
     template: '<h1>A custom component!</h1>'
 });
 
-new Vue({
+var Bike = {
+    template: '<p>腳踏車</p>'
+};
+
+var myVue = new Vue({
     el: '#test',
     data: {
         msg: 'Test 123',
@@ -14,12 +20,37 @@ new Vue({
             {id: 2},
             {id: 3}
         ],
-        currentView: 'home'
+        currentView: Bike,
+        NTD: 0,
+        githubRepo: [],
+        repoRes: {}
+    },
+    mounted: function() {
+        this.fetchRepos();
     },
     components: {
-        home: {
-            template: '<p>Welcome home!</p>'
+        fast: {template: '<h3>快車</h3>'},
+        bus: {template: '<h2>公車</h2>'},
+        business: {template: '<h1>商務艙</h1>'}
+    },
+    computed: {
+        japan: function() {
+            return this.NTD * 0.2713;
+        }
+    },
+    methods: {
+        nowDate: function() {
+            console.log('When data re-render happen, methods are running.');
+            return Date.now();
+        },
+        fetchRepos: function() {
+            this.$http.get('https://api.github.com/users/thumbe12856/repos').then((response) => {
+                response.data.forEach(function (element){
+                    myVue.githubRepo.push(element.full_name);
+                });
+            }, (response) => {
+                console.log('fail', response);
+            });
         }
     }
-
 });
