@@ -30,24 +30,28 @@
             </div>
 
             <div id="money">
-                <input id="NTD" v-model="NTD"/>
+                <input id="NTD" v-model="NTD" v-on:input="inputUpdate"/>
                 <p>@{{ nowDate() }}</p>
                 <p>日幣: @{{japan}}</p>
             </div>
 
             <div id="githubRepoDiv">
                 <h1>Thumbe Repositories:</h1>
+                <template v-for="RVal in radioVal">
+                    <input type="radio" v-bind:value="RVal" v-model="currentRadioVal">
+                    @{{RVal}}
+                </template>
                 <ul>
-                    <li v-for="repo in githubRepo">@{{ repo }}</li>
+                    <li v-for="(repo, index) in githubRepo">@{{ index+1 }}. @{{ repo }}</li>
                 </ul>
             </div>
         </div>
 
         <script src="{{ asset('js/test.js') }}"></script>
         <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.js"></script>
-        <script src="https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js"></script>-->
         <script>
-            Vue.component('my-component', {
+            /*Vue.component('my-component', {
                 template: '<h1>A custom component!</h1>'
             });
 
@@ -67,9 +71,11 @@
                     ],
                     currentView: Bike,
                     NTD: 0,
-                    githubRepo: []
+                    githubRepo: [],
+                    radioVal: ['No.1', 'No.2'],
+                    currentRadioVal: ''
                 },
-                mounted: function() {
+                created: function() {
                     this.fetchRepos();
                 },
                 components: {
@@ -80,6 +86,14 @@
                 computed: {
                     japan: function() {
                         return this.NTD * 0.2713;
+                    }
+                },
+                watch: {
+                    items: {
+                        handler: function(val, oldVal) {
+                            console.log('item change: ' , val , oldVal);
+                        },
+                        deep: true
                     }
                 },
                 methods: {
@@ -95,9 +109,12 @@
                         }, (response) => {
                             console.log('fail', response);
                         });
+                    },
+                    inputUpdate: function() {
+                        console.log('update');
                     }
                 }
-            });
-        </script>-->
+            });*/
+        </script>
     </body>
 </html>

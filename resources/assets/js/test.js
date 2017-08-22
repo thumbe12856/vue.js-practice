@@ -23,9 +23,10 @@ var myVue = new Vue({
         currentView: Bike,
         NTD: 0,
         githubRepo: [],
-        repoRes: {}
+        radioVal: ['No.1', 'No.2'],
+        currentRadioVal: ''
     },
-    mounted: function() {
+    created: function() {
         this.fetchRepos();
     },
     components: {
@@ -38,19 +39,30 @@ var myVue = new Vue({
             return this.NTD * 0.2713;
         }
     },
+    watch: {
+        items: {
+            handler: function(val, oldVal) {
+                console.log('item change: ' , val , oldVal);
+            },
+            deep: true
+        }
+    },
     methods: {
         nowDate: function() {
-            console.log('When data re-render happen, methods are running.');
             return Date.now();
         },
         fetchRepos: function() {
             this.$http.get('https://api.github.com/users/thumbe12856/repos').then((response) => {
+                console.log(response);
                 response.data.forEach(function (element){
                     myVue.githubRepo.push(element.full_name);
                 });
             }, (response) => {
                 console.log('fail', response);
             });
+        },
+        inputUpdate: function() {
+            console.log('update');
         }
     }
 });
