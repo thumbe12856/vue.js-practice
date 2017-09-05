@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 
 <!-- For playing nice with Vue.js syntax at PhpStorm -->
 @if (false)<html xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml"> @endif
@@ -18,6 +18,8 @@
             <a v-bind:href="url">@{{ url }}</a>
 
             <div id="dynamic-component">
+                <fast></fast><bus></bus><business></business>
+
                 <input type="radio" id="one" value="fast" v-model="currentView" />
                 <label for="one">fast</label>
                 <br />

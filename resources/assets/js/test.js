@@ -2,6 +2,7 @@ import VueResource from 'vue-resource/dist/vue-resource'
 import Vue from 'vue'
 Vue.use(require('vue-resource'));
 
+// global
 Vue.component('my-component', {
     template: '<h1>A custom component!</h1>'
 });
@@ -29,7 +30,7 @@ var myVue = new Vue({
     created: function() {
         this.fetchRepos();
     },
-    components: {
+    components: { // local
         fast: {template: '<h3>快車</h3>'},
         bus: {template: '<h2>公車</h2>'},
         business: {template: '<h1>商務艙</h1>'}

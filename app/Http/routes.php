@@ -26,3 +26,7 @@ Route::get('todo', function () {
 Route::get('test', function () {
     return view('test');
 });
+
+Route::get('component', function () {
+    return view('component');
+});
